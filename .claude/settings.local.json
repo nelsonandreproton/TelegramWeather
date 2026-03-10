@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sed 's/name = \"\"//')",
+      "Bash(sed 's/\"\"//')",
+      "WebFetch(domain:api.open-meteo.com)",
+      "WebFetch(domain:air-quality-api.open-meteo.com)",
+      "WebFetch(domain:open-meteo.com)",
+      "WebFetch(domain:docs.astral.sh)",
+      "WebFetch(domain:apscheduler.readthedocs.io)",
+      "WebFetch(domain:pypi.org)",
+      "Bash(uv sync)"
+    ]
+  }
+}
