@@ -66,3 +66,6 @@ async def send_message(token: str, chat_id: str, text: str) -> None:
     async with httpx.AsyncClient(timeout=10.0) as client:
         resp = await client.post(url, json=payload)
     resp.raise_for_status()
+    body = resp.json()
+    if not body.get("ok"):
+        raise RuntimeError(f"Telegram API error: {body.get('description', 'unknown error')}")

@@ -27,7 +27,7 @@ class WeatherData(TypedDict):
 
 
 def _first_valid(values: list, preferred_index: int = 12) -> float:
-    if values[preferred_index] is not None:
+    if len(values) > preferred_index and values[preferred_index] is not None:
         return float(values[preferred_index])
     valid = [v for v in values if v is not None]
     return float(valid[-1]) if valid else 0.0
@@ -64,8 +64,9 @@ async def fetch_weather(latitude: float, longitude: float) -> WeatherData:
     forecast_resp.raise_for_status()
     aqi_resp.raise_for_status()
 
-    daily = forecast_resp.json()["daily"]
-    hourly = forecast_resp.json()["hourly"]
+    forecast_json = forecast_resp.json()
+    daily = forecast_json["daily"]
+    hourly = forecast_json["hourly"]
     aqi_hourly = aqi_resp.json()["hourly"]
 
     humidity_values = [v for v in hourly["relative_humidity_2m"] if v is not None]
